@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  museum: one
+  start_date: 2025-03-25
+  end_date: 2025-03-25
+
+two:
+  user: two
+  museum: two
+  start_date: 2025-03-25
+  end_date: 2025-03-25

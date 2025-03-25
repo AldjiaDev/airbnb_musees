@@ -1,0 +1,28 @@
+<h1><%= @museum.new_record? ? "Ajouter un Musée" : "Modifier le Musée" %></h1>
+
+<%= form_with model: @museum do |f| %>
+  <div>
+    <%= f.label :name, "Nom du musée" %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+
+  <div>
+    <%= f.label :description, "Description" %>
+    <%= f.text_area :description, class: "form-control" %>
+  </div>
+
+  <div>
+    <%= f.label :address, "Adresse" %>
+    <%= f.text_field :address, class: "form-control" %>
+  </div>
+
+  <div>
+    <%= f.label :image_url, "URL de l'image" %>
+    <%= f.text_field :image_url, class: "form-control" %>
+  </div>
+
+  <%= f.submit "Enregistrer", class: "btn btn-success" %>
+<% end %>
+
+<%= link_to "Retour", museums_path, class: "btn btn-secondary" %>
+

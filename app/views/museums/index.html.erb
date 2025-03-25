@@ -1,0 +1,16 @@
+<h1>Liste des Musées</h1>
+<%= link_to "Ajouter un musée", new_museum_path, class: "btn btn-primary" %>
+
+<ul>
+  <% @museums.each do |museum| %>
+    <li>
+      <h3><%= link_to museum.name, museum_path(museum) %></h3>
+      <p><%= museum.description %></p>
+      <p><%= museum.address %></p>
+      <% if museum.image_url.present? %>
+        <img src="<%= museum.image_url %>" alt="<%= museum.name %>" width="200">
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+

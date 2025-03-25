@@ -1,0 +1,42 @@
+<h1><%= @museum.name %></h1>
+<p><%= @museum.description %></p>
+<p>Adresse : <%= @museum.address %></p>
+<% if @museum.image_url.present? %>
+  <img src="<%= @museum.image_url %>" alt="<%= @museum.name %>" width="300">
+<% end %>
+
+<%= link_to "Modifier", edit_museum_path(@museum), class: "btn btn-warning" %>
+<%= link_to "Supprimer", museum_path(@museum), method: :delete, data: { confirm: "Es-tu sûr ?" }, class: "btn btn-danger" %>
+<%= link_to "Retour", museums_path, class: "btn btn-secondary" %>
+
+<% if user_signed_in? %>
+  <h3>Réserver ce musée</h3>
+  <%= form_with model: [@museum, Booking.new], local: true do |f| %>
+    <div>
+      <%= f.label :start_date, "Date de début" %>
+      <%= f.date_field :start_date, class: "form-control" %>
+    </div>
+
+    <div>
+      <%= f.label :end_date, "Date de fin" %>
+      <%= f.date_field :end_date, class: "form-control" %>
+    </div>
+
+    <%= f.submit "Réserver", class: "btn btn-primary mt-2" %>
+  <% end %>
+<% else %>
+  <p><%= link_to "Connecte-toi", new_user_session_path %> pour réserver.</p>
+<% end %>
+
+<h3>Réservations</h3>
+<ul>
+  <% @museum.bookings.each do |booking| %>
+    <li>
+      <strong><%= booking.user.email %></strong> → Du <%= booking.start_date %> au <%= booking.end_date %>
+      <% if booking.user == current_user %>
+        <%= link_to "Annuler", museum_booking_path(@museum, booking), method: :delete, data: { confirm: "Es-tu sûr ?" }, class: "btn btn-danger btn-sm" %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+
